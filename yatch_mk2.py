@@ -20,7 +20,6 @@ class Yatch:
     def mergeDices(self):
         self.result = self.dices + self.fixed
 
-
     def execCmd(self):
         while True:
             cmd = input().split(' ')
@@ -45,14 +44,19 @@ class Yatch:
 
 if __name__ == "__main__":
     y = Yatch()
+
     print ('--------------------------------')
     print ('고정: f idx (ex. f 1)')
     print ('고정 해제: u idx (ex. u 1)')
     print ('만족하셨다면 리롤: r (ex. r)')
     print ('--------------------------------')
+
     y.rollDices()
+
     for i in range(2):
         y.execCmd()
+
     y.mergeDices()
+    
     print (y.result)
 

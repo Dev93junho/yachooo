@@ -13,9 +13,14 @@ class Yatch:
 
     def fixDice(self, idx):
         self.fixed.append(self.dices.pop(idx))
+        print(self.fixed, 'is fixed')
+        print(self.dices, 'will be rolled')
 
     def unfixDice(self, idx):
+        print (self.fixed[idx],'is unfixed')
         self.dices.append(self.fixed.pop(idx))
+        print(self.fixed, 'is fixed')
+        print(self.dices, 'will be rolled')
 
     def mergeDices(self):
         self.result = self.dices + self.fixed
@@ -27,20 +32,17 @@ class Yatch:
 
             if func == 'r':
                 self.rollDices()
-                break
-            else:
+                return 0
+            elif func == 'f' and len(cmd)==2:
                 idx = int(cmd[1])-1
-
-                if func == 'f':
-                    self.fixDice(idx)
-                    print(self.fixed, 'is fixed')
-                    print(self.dices, 'will be rolled')
-                    
-                elif func == 'u':
-                    print (self.fixed[idx],'is unfixed')
-                    self.unfixDice(idx)
-                    print(self.fixed, 'is fixed')
-                    print(self.dices, 'will be rolled')
+                self.fixDice(idx)
+            elif func == 'u' and len(cmd)==2:
+                idx = int(cmd[1])-1
+                self.unfixDice(idx)
+            elif func == 'z':
+                return 1
+            else:
+                print('Wrong command')
 
 if __name__ == "__main__":
     y = Yatch()
@@ -48,15 +50,17 @@ if __name__ == "__main__":
     print ('--------------------------------')
     print ('고정: f idx (ex. f 1)')
     print ('고정 해제: u idx (ex. u 1)')
-    print ('만족하셨다면 리롤: r (ex. r)')
+    print ('리롤: r (ex. r)')
     print ('--------------------------------')
 
     y.rollDices()
 
     for i in range(2):
-        y.execCmd()
+        if y.execCmd() == 1:
+            break
 
     y.mergeDices()
     
     print (y.result)
+
 

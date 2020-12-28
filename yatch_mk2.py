@@ -10,6 +10,7 @@ class Yatch:
         n = len(self.dices)
         self.dices = list(map(lambda x: random.randint(1,6), [0]*n))
         print (self.dices)
+        return 0
 
     def fixDice(self, idx):
         self.fixed.append(self.dices.pop(idx))
